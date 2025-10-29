@@ -1,5 +1,6 @@
 import 'package:covid_tracker/Model/country_list.dart';
 import 'package:covid_tracker/Model/services/country_services.dart';
+import 'package:covid_tracker/views/country_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -112,7 +113,9 @@ class _CountriesListState extends State<CountriesList> {
                         } else {
                           final items = snapshot.data!;
                           return RefreshIndicator(
-                            onRefresh: () => ss.getData(),
+                            onRefresh: () async {
+                              setState(() {});
+                            },
                             child: ListView.builder(
                               itemCount:
                                   snapshot.data!.length,
@@ -123,38 +126,51 @@ class _CountriesListState extends State<CountriesList> {
                                     country.country!;
 
                                 if (search.text.isEmpty) {
-                                  return Card(
-                                    child: ListTile(
-                                      // leading: CircleAvatar(
-                                      //   backgroundImage:
-                                      //       NetworkImage(
-                                      //         country
-                                      //             .countryInfo!
-                                      //             .flag!
-                                      //             .toString(),
-                                      //       ),
-                                      // ),
-                                      leading: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(
-                                              4,
+                                  return InkWell(
+                                    onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            CountryDetailsView(
+                                              country:
+                                                  country,
                                             ),
-                                        child: Image.network(
-                                          country
-                                              .countryInfo!
-                                              .flag!
-                                              .toString(),
-                                          height: 40,
-                                          width: 60,
-                                          fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    child: Card(
+                                      child: ListTile(
+                                        // leading: CircleAvatar(
+                                        //   backgroundImage:
+                                        //       NetworkImage(
+                                        //         country
+                                        //             .countryInfo!
+                                        //             .flag!
+                                        //             .toString(),
+                                        //       ),
+                                        // ),
+                                        leading: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(
+                                                4,
+                                              ),
+                                          child: Image.network(
+                                            country
+                                                .countryInfo!
+                                                .flag!
+                                                .toString(),
+                                            height: 40,
+                                            width: 60,
+                                            fit: BoxFit
+                                                .cover,
+                                          ),
                                         ),
-                                      ),
-                                      title: Text(
-                                        country.country
-                                            .toString(),
-                                      ),
-                                      subtitle: Text(
-                                        'Effected: ${country.cases.toString()}',
+                                        title: Text(
+                                          country.country
+                                              .toString(),
+                                        ),
+                                        subtitle: Text(
+                                          'Effected: ${country.cases.toString()}',
+                                        ),
                                       ),
                                     ),
                                   );

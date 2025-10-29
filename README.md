@@ -12,6 +12,7 @@ A Flutter app that shows live COVID-19 data for all countries.
   <img src="docs/screenshots/3.png" alt="Home Screen" width="250"/>
   <img src="docs/screenshots/4.png" alt="Home Screen" width="250"/>
   <img src="docs/screenshots/5.png" alt="Home Screen" width="250"/>
+  <img src="docs/screenshots/6.png" alt="Home Screen" width="250"/>
   
 </p>
 
